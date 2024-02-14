@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Checkout {% endblock %}
+{% block content %}
+
+    <!--breadcrumbs area start-->
+    <div class="breadcrumbs_area">
+        <div class="container">   
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <ul>
+                            <li><a href="index.html">home</a></li>
+                            <li>Checkout</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>         
+    </div>
+    <!--breadcrumbs area end-->
+    
+    <!--Checkout page section-->
+    <div class="Checkout_section mt-60">
+       <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            {% for field, errors in form.errors.items %}
+                            <strong>{{ field }}</strong>: {{ errors|join:", " }}<br>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+               <div class="col-12">
+                {% if request.user.is_authenticated and request.user.customer %}
+                <div></div>
+                {% else %}
+                    <div class="user-actions">
+                        <h3> 
+                            <i class="fa fa-file-o" aria-hidden="true"></i>
+                            Returning customer?
+                            <a class="Returning" href="#" data-bs-toggle="collapse" data-bs-target="#checkout_login" aria-expanded="true">Click here to login</a>     
+
+                        </h3>
+                         <div id="checkout_login" class="collapse" data-parent="#accordion">
+                            <div class="checkout_info">
+                                <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing & Shipping section.</p>  
+                                <form method="post">  
+                                    <div class="form_group">
+                                        <label>Username or email <span>*</span></label>
+                                        <input type="text">     
+                                    </div>
+                                    <div class="form_group">
+                                        <label>Password  <span>*</span></label>
+                                        <input type="text">     
+                                    </div> 
+                                    <div class="form_group group_3 ">
+                                        <button type="submit">Login</button>
+                                        <label for="remember_box">
+                                            <input id="remember_box" type="checkbox">
+                                            <span> Remember me </span>
+                                        </label>     
+                                    </div>
+                                    <a href="#">Lost your password?</a>
+                                </form>          
+                            </div>
+                        </div>    
+                    </div>
+                    {% endif %}   
+               </div>
+            </div>
+            <div class="checkout_form">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <form id="checkout-form-submit" method="post">
+                            {% csrf_token %}
+                            <h3>Shipping Details</h3>
+                            <div class="row">
+
+                                {{form.as_p}}
+                                    	    	    	    	    	    	    
+                            </div>
+                            <button type="submit">Submit</button>
+                        </form>    
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <!-- <form action="#">     -->
+                            <h3>Your order</h3> 
+                            <div class="order_table table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- {% if 'cart' in request.session %} -->
+                                    {% for cp in cart.cartproduct_set.all %}
+                                        <tr>
+                                            <td> {{cp.product.title}} <strong> × {{cp.quantity}}</strong></td>
+                                            <td> Rs. {{cp.subtotal}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <!-- {% else %}
+                                        Your shopping cart is empty.
+                                    {% endif %} -->
+                                        
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Cart Subtotal</th>
+                                            <td>Rs. {{cart.total}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Shipping</th>
+                                            <td><strong>Rs. 0.00</strong></td>
+                                        </tr>
+                                        <tr class="order_total">
+                                            <th>Order Total</th>
+                                            <td><strong>Rs. {{cart.total}}</strong></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>     
+                            </div>
+                            <!-- <div class="payment_method">
+                               <div class="panel-default">
+                                    <input id="payment" name="check_method" type="radio" data-bs-target="createp_account" />
+                                    <label for="payment" data-bs-toggle="collapse" data-bs-target="#method" aria-controls="method">Create an account?</label>
+
+                                    <div id="method" class="collapse one" data-parent="#accordion">
+                                        <div class="card-body1">
+                                           <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+                                        </div>
+                                    </div>
+                                </div>  -->
+                               <!-- <div class="panel-default">
+                                    <input id="payment_defult" name="check_method" type="radio" data-bs-target="createp_account" />
+                                    <label for="payment_defult" data-bs-toggle="collapse" data-bs-target="#collapsedefult" aria-controls="collapsedefult">Esewa <img src="assets/img/icon/papyel.png" alt=""></label>
+
+                                    <div id="collapsedefult" class="collapse one" data-parent="#accordion">
+                                        <div class="card-body1">
+                                           <p>Pay via Esewa; you can pay with your credit card if you don’t have a Esewa account.</p> 
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="order_button">
+                                    <button id="checkout-btn-submit" type="submit">Proceed</button> 
+                                </div>    
+                            </div> 
+                        <!-- </form>          -->
+                    </div>
+                </div> 
+            </div> 
+        </div>       
+    </div>
+    <!--Checkout page section end-->
+
+{% endblock %}
+
+{% block js %}
+
+    <script>
+            $('#checkout-btn-submit').on('click', function(){
+                $('#checkout-form-submit').submit();
+            });
+
+            // $('#checkout-btn-submit').on('click', function(){
+
+            // });
+    </script>
+
+{% endblock %}

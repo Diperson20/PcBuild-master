@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} {{product.title}} {% endblock %}
+{% block content %}
+    <!--breadcrumbs area start-->
+    <div class="breadcrumbs_area">
+        <div class="container">   
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <ul>
+                            <li><a href="">home</a></li>
+                            <li>product details</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>         
+    </div>
+    <!--breadcrumbs area end-->
+    
+     <!--product details start-->
+    <div class="product_details mt-50 mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                   <div class="product-details-tab">
+                        <div id="img-1" class="zoomWrapper single-zoom">
+                            <a href="#">
+                                <img id="zoom1" src="{{product.image.url}}" data-zoom-image="{{product.image.url}}" alt="{{product.title}}">
+                            </a>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product_d_right">
+                       <form action="#">
+                           
+                            <h1>{{product.title}}</h1>
+                            <div class="product_nav">
+                                <ul>
+                                    <li class="prev"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                                    <li class="next"><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="product_rating">
+                                <ul>
+                                    <li><a href="#"><i class="zmdi zmdi-star-outline"></i></a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-star-outline"></i></a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-star-outline"></i></a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-star-outline"></i></a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-star-outline"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="price_box">
+                                <span class="current_price">Rs.{{product.selling_price}}</span>
+                                <span class="old_price">Rs. {{product.marked_price}}</span>
+                            </div>
+                            <div class="product_desc">
+                                <h4>(Viewed {{product.view_count}} times)</h4>
+                                <h5>Category: {{product.category}}</h5>
+                            </div>                          
+                            <div class="product_variant quantity">
+                                <label>quantity</label>
+                                <input min="1" max="100" value="1" type="number">
+                            </div>
+                             <div class="action_links">
+                                <ul>
+                                    <li class="add_to_cart"><a href="{% url 'ecomapp:addtocart' product.id %}" title="add to cart"><i class="zmdi zmdi-shopping-cart-plus"></i> add to cart</a></li>
+                                </ul>
+                            </div>
+                            <div class="product_meta">
+                                <span>Category: <a href="#">{{product.category.title}}</a></span>
+                            </div>
+                            
+                        </form>              
+
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <!--product details end-->
+    
+    <!--product info start-->
+    <div class="product_d_info">
+        <div class="container">   
+            <div class="row">
+                <div class="col-12">
+                    <div class="product_d_inner">   
+                        <div class="product_info_button">    
+                            <ul class="nav" role="tablist">
+                                <li >
+                                    <a class="active" data-bs-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Description</a>
+                                </li>
+                                <li>
+                                     <a data-bs-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Specification</a>
+                                </li>
+                             
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="info" role="tabpanel" >
+                                <div class="product_info_content">
+                                    {{product.description}}
+                                </div>    
+                            </div>
+                            <div class="tab-pane fade" id="sheet" role="tabpanel" >
+                                
+                                <div class="product_info_content">
+                                    <p class="text-info">Warranty: {{product.warranty}}</p>
+                                    <p class="text-info">Return Policy:{{product.return_policy}}</p>
+                                </div>    
+                            </div>
+
+                         
+                        </div>
+                    </div>     
+                </div>
+            </div>
+        </div>    
+    </div>  
+    <!--product info end-->
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Contact us{% endblock %}
+
+{% block content %}
+   <!--breadcrumbs area start-->
+   <div class="breadcrumbs_area">
+    <div class="container">   
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content">
+                    <ul>
+                        <li><a href="{% url 'ecomapp:home'%}">home</a></li>
+                        <li>Contact us</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>         
+</div>
+<!--breadcrumbs area end-->
+
+ <!--contact map start-->
+<div class="contact_map mt-60">
+   <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="mapouter"><div class="gmap_canvas"><iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=1025&amp;height=400&amp;hl=en&amp;q=kirtippur,nayabazar&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://pdflist.com/" alt="pdf download">Pdf download</a></div><style>.mapouter{position:relative;text-align:right;width:100%;height:400px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:400px;}.gmap_iframe {height:400px!important;}</style></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--contact map end-->
+
+<!--contact area start-->
+<div class="contact_area">
+    <div class="container">   
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+               <div class="contact_message content">
+                    <h3>contact us</h3>    
+                     <p>Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram anteposuerit litterarum formas human. qui sequitur mutationem consuetudium lectorum. Mirum est notare</p>
+                    <ul>
+                        <li><i class="fa fa-fax"></i>  Address : Kirtipur ring road ,KTM City</li>
+                        <li><i class="fa fa-phone"></i> <a href="#">Info@pcbuild.com</a></li>
+                        <li><i class="fa fa-envelope-o"></i> (+977)8888888888</li>
+                    </ul>             
+                </div> 
+            </div>
+            <div class="col-lg-6 col-md-12">
+               <div class="contact_message form">
+                    <h3>Place your Requirement</h3>   
+                    <form id="" method="POST">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <button type="submit"> Send</button>  
+                        <p class="form-messege"></p>
+                    </form> 
+
+                </div> 
+            </div>
+        </div>
+    </div>    
+</div>
+
+<!--contact area end-->
+
+<!--brand newsletter area start-->
+<div class="brand_newsletter_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="brand_container owl-carousel">
+                    <div class="single_brand">
+                        <a href="#"><img src="{% static 'img/brand/brand.png' %}" alt=""></a>
+                    </div>
+                    <div class="single_brand">
+                        <a href="#"><img src="{% static 'img/brand/brand1.png' %}" alt=""></a>
+                    </div>
+                    <div class="single_brand">
+                        <a href="#"><img src="{% static 'img/brand/brand2.png' %}" alt=""></a>
+                    </div>
+                    <div class="single_brand">
+                        <a href="#"><img src="{% static 'img/brand/brand3.png' %}" alt=""></a>
+                    </div>
+                    <div class="single_brand">
+                        <a href="#"><img src="{% static 'img/brand/brand4.png' %}" alt=""></a>
+                    </div>
+                    <div class="single_brand">
+                        <a href="#"><img src="{% static 'img/brand/brand5.png' %}" alt=""></a>
+                    </div>
+                    <div class="single_brand">
+                        <a href="#"><img src="{% static 'img/brand/brand6.png' %}" alt=""></a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!--brand area end-->
+{% endblock %}

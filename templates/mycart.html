@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} My cart{% endblock %}
+
+
+{% block content %}
+    <!--breadcrumbs area start-->
+    <div class="breadcrumbs_area">
+        <div class="container">   
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <ul>
+                            <li><a href="">home</a></li>
+                            <li>Shopping Cart</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>         
+    </div>
+    <!--breadcrumbs area end-->
+    
+     <!--shopping cart area start -->
+    <div class="shopping_cart_area mt-60">
+        <div class="container">  
+            <form action="#"> 
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table_desc">
+                            <div class="cart_page table-responsive">
+                                <table>
+                            <thead>
+                                <tr>
+                                    <th class="product_thumb">Image</th>
+                                    <th class="product_name">Product</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product_quantity">Quantity</th>
+                                    <th class="product_total">Total</th>
+                                    <th class="product_remove">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cp in cart.cartproduct_set.all %}
+                                <tr>
+                                    <td class="product_thumb"><a href="#"><img src="{{cp.product.image.url}}" alt=""></a></td>
+                                    <td class="product_name"><a href="#">{{cp.product.title}}</a></td>
+                                    <td class="product-price">Rs. {{ cp.rate }}</td>
+                                    <td class="product_quantity"><label>Quantity</label>
+                                        {{cp.quantity}}
+                                    </td>
+                                    <td class="product_total">Rs. {{cp.subtotal}}</td>
+                                    <td class="product_remove">
+                                        <a href="{% url 'ecomapp:managecart' cp.id %}?action=inc" class="btn btn-primary"> + </a>
+                                        <a href="{% url 'ecomapp:managecart' cp.id %}?action=dcr" class="btn btn-warning"> - </a>
+                                        <a href="{% url 'ecomapp:managecart' cp.id %}?action=rmv" class="btn btn-danger"> x </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                
+                                
+
+                            </tbody>
+
+                        </table>   
+                            </div> 
+                            {% if cart.cartproduct_set.all %} 
+                            <div class="cart_submit">
+                                <a id="update-cart" href="{% url 'ecomapp:emptycart' %}">Empty cart</a>
+                            </div>
+                            {% endif %}
+                        </form>
+      
+                        </div>
+                     </div>
+                 </div>
+                 <!--coupon code area start-->
+                <div class="coupon_area">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="coupon_code right">
+                                <h3>Cart Totals</h3>
+                                <div class="coupon_inner">
+                                   <div class="cart_subtotal">
+                                       <p>Subtotal</p>
+                                       <p class="cart_amount">Rs. {{cart.total}}</p>
+                                   </div>
+                                   <div class="cart_subtotal">
+                                       <p>Shipping</p>
+                                       <p class="cart_amount"> Rs. 0.00</p>
+                                   </div>
+                                   <a href="#">Calculate shipping</a>
+
+                                   <div class="cart_subtotal">
+                                       <p>Total</p>
+                                       <p class="cart_amount">Rs. {{cart.total}}</p>
+                                   </div>
+                                   {% if cart.cartproduct_set.all %}
+                                   <div class="checkout_btn">
+                                       <a href="{% url 'ecomapp:checkout' %}">Proceed to Checkout</a>
+                                   </div>
+                                   {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--coupon code area end-->
+            </form> 
+        </div>     
+    </div>
+     <!--shopping cart area end -->
+    
+
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        // $(document).ready(function(){
+        //     $('#update-cart').on('click', function(){
+        //         $('#quantity-update').submit();
+        //     });
+        // });
+    </script>
+
+{% endblock %}

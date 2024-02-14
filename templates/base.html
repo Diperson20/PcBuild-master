@@ -1,0 +1,42 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>PC Build | {% block title %}{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS 
+    ========================= -->
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="{% static 'css/plugins.css' %}">
+
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+    {% include "includes/header.html" %}
+    {% include "includes/mobile_header.html" %}
+
+    {% block content %}{% endblock %}
+
+    {% include "includes/footer.html" %}
+
+     <!-- JS
+============================================ -->
+
+    <!-- Plugins JS -->
+    <script src="{% static 'js/plugins.js' %}"></script>
+
+    <!-- Main JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

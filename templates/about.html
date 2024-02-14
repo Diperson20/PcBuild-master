@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}About us{% endblock %}
+
+{% block content %}
+<div class="about_section mt-60">
+    <div class="container">  
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="about_thumb">
+                    {% load static %}
+<img src="{% static 'img/about/about1.jpg' %}" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="about_content">
+                    <h1>Welcome To PC Build</h1>
+                    <p>PC Build Ecommerce has gained immense popularity and offers numerous benefits to both tech enthusiasts and casual users. One of the key advantages of PC Build Ecommerce is the ability to customize and tailor your computer according to your specific needs. Unlike pre-built systems, where you are limited to predetermined configurations, PC Build Ecommerce platforms allow you to select each component individually, ensuring that you have complete control over the performance, aesthetics, and budget of your PC.</p>
+                    <div class="view__work">
+                        <a href="#">view work </a>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>     
+</div>
+{% endblock %}

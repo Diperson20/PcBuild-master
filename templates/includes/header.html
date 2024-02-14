@@ -1,0 +1,164 @@
+{% load static %}
+<!--header area start-->
+<header class="header_area header_color">
+    <!--header top start-->
+    <div class="header_top">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4">
+                    <div class="welcome_text">
+                        <p>Welcome to <span>PC Build</span> </p>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="top_right text-right">
+                        {% if request.user.customer %}
+                        <ul>
+                            <li class="top_links"><a href="#"><i class="zmdi zmdi-account"></i> My account <i
+                                        class="zmdi zmdi-caret-down"></i></a>
+                                <ul class="dropdown_links">
+                                    <li><a href="{% url 'ecomapp:customerprofile' %}">My Account </a></li>
+                                    <li><a href="{% url 'ecomapp:mycart' %}">Shopping Cart</a></li>
+                                    <li><a href="{% url 'ecomapp:customerlogout' %}">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        {% else %}
+                        <ul>
+                            <li class="top_links"><a href="#"><i class="zmdi zmdi-account"></i> My Account <i
+                                class="zmdi zmdi-caret-down"></i></a>
+                                <ul class="dropdown_links">
+                                    <li><a href="{% url 'ecomapp:customerlogin' %}">Login</a></li>
+                                    <li><a href="{% url 'ecomapp:customerregistration' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">Register</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--header top start-->
+    <!--header center area start-->
+    <div class="header_middle">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-12 col-xs-12">
+                    <div class="logo align-items-center">
+                        <a href="{% url 'ecomapp:home' %}"><img src="{% static 'img/logo/pc-builder-logo.png' %}" alt="logo"></a>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="header_middle_inner">
+                        <div class="search-container">
+                            <form action="{% url 'ecomapp:search' %}" method="get">
+                                <div class="hover_category">
+                                    <select class="select_option" name="select" id="categori">
+                                        <option selected value="1">All Categories</option>
+                                        {% for cat in header_categories %}
+                                        <option value="{{ cat.id }}">{{ cat.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="search_box">
+                                    <input placeholder="Search product..." type="text" name="keyword">
+                                    <button type="submit"><i class="zmdi zmdi-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- cart start -->
+                        <div class="mini_cart_wrapper">
+                            <a href="javascript:void(0)"><i class="zmdi zmdi-shopping-basket"></i> <span>{{ cart.cartproduct_set.all|length }} items - {{cart.total}}
+                               </span> </a>
+                            <!--mini cart-->
+                            <div class="mini_cart">
+                                {% for item in cart.cartproduct_set.all %}
+                                <div class="cart_item">
+                                    <div class="cart_img">
+                                        <a href="#"><img src="{{item.product.image.url}}" alt=""></a>
+                                    </div>
+                                    <div class="cart_info">
+                                        <a href="#">{{ item.product.title }}</a>
+
+                                        <span class="quantity">Qty: {{ item.quantity }}</span>
+                                        <span class="price_cart">Rs.{{ item.rate }}</span>
+
+                                    </div>
+                                    <div class="cart_remove">
+                                        <a href="#"><i class="ion-android-close"></i></a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                
+
+                                <div class="mini_cart_footer">
+                                    <div class="cart_button">
+                                        <a href="{% url 'ecomapp:mycart' %}">View cart</a>
+                                        {% if cart.cartproduct_set.all %}
+                                        <a href="{% url 'ecomapp:checkout' %}">Checkout</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--mini cart end-->
+                        </div>
+                        <!-- cart end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--header center area end-->
+
+    <!--header middel start-->
+    <div class="header_bottom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3">
+                    <div class="categories_menu categori_three">
+                        <div class="categories_title">
+                            <h2 class="categori_toggle">Categories</h2>
+                        </div>
+                        <div class="categories_menu_toggle">
+                            <ul>
+                                {% for cat in header_categories %}
+                                <li><a href="{% url 'ecomapp:allproducts' cat.slug %}"><span></span> {{ cat.title }}<i
+                                            class="fa fa-angle-right"></i></a>
+
+                                </li>
+                                {% endfor %}
+
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="main_menu menu_three header_position">
+                        <nav>
+                            <ul>
+                                <li class="active"><a href="{% url 'ecomapp:home' %}"><i class="zmdi zmdi-home"></i> home </i></a>
+
+                                </li>
+
+                                <li><a href="{% url 'ecomapp:faq' %}"><i class="zmdi zmdi-star"></i> FAQ </a>
+
+                                </li>
+
+                                <li><a href="{% url 'ecomapp:about' %}"><i class="zmdi zmdi-comments"></i> about Us</a></li>
+                                <li><a href="{% url 'ecomapp:contact' %}"><i class="zmdi zmdi-account-box-mail"></i> Contact Us</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--header middel end-->
+
+</header>
+<!--header area end-->
